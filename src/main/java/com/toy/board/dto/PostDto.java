@@ -1,6 +1,6 @@
 package com.toy.board.dto;
 
-import com.toy.board.domain.Board;
+import com.toy.board.domain.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 
-public class CreateDto {
+public class PostDto {
     @AllArgsConstructor
     @Data
     @Builder
@@ -18,8 +18,9 @@ public class CreateDto {
         private String writer;
         private String password;
 
-        public Board toDto()  {
-            return Board.builder()
+
+        public Post toEntity() {
+            return Post.builder()
                     .title(title)
                     .content(content)
                     .writer(writer)
@@ -39,15 +40,16 @@ public class CreateDto {
         private LocalDateTime created;
         private LocalDateTime updated;
 
-        public Board toDto(Board board) {
-            return Board.builder()
-                    .id(board.getId())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .writer(board.getWriter())
-                    .created(board.getCreated())
-                    .updated(board.getUpdated())
+        public static Response toDto(Post post) {
+            return Response.builder()
+                    .id(post.getId())
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .writer(post.getWriter())
+                    .created(post.getCreated())
+                    .updated(post.getUpdated())
                     .build();
-        }
+            }
     }
 }
+
